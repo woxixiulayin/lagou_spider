@@ -2,7 +2,7 @@
 一个用来展示拉勾网职位信息的页面
 
 ####技术栈
-Pyhton、js、AJAX、Echart
+Pyhton、js、AJAX、Echarts
 
 ####展示页面：
 后续补充
