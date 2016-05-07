@@ -1,7 +1,3 @@
-function $(id) {
-    return document.getElementsById(id);
-}                                         
-
 var MQ = (function () {
     var singlemq = {};
 
