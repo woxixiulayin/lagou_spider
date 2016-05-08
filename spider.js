@@ -80,3 +80,10 @@ spider.fetchData = function (url) {
 }
 
 spider.fetchData("http://www.lagou.com/jobs/positionAjax.json?city=%E4%B8%8A%E6%B5%B7&kd=%E5%89%8D%E7%AB%AF&pn=133");
+
+
+var export = module.export
+export.MQ = MQ;
+export.Msg = Msg;
+export.Spider = Spider;
+
