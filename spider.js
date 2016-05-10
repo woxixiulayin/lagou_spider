@@ -27,23 +27,19 @@ var getHtml = function(url) {
     return promise;
 };
 
-var Spider = {};
-Spider.urls = [];
-Spider.workers = [];//成员是promise变量，异步获取html
-Spider.results = [];//存放爬取结果
-Spider.addUrl = function (url) {
-    this.urls.push(url);
-    var worker = this.creatWorker(url);
-    this.workers.push(worker.then(that.actAftGetHtml));
+function Spider (jds, workpromise) {
+    this.urls = [];
+    this.workerpromises = [];
+    this.jds = jds;
+    this.workpromise = workpromise;
 };
-Spider.creatWorker = function (url) {//返回promise实例,可以复写该函数定制自己的处理规则
-    var worker = getHtml(url);
-    var that = this;
-    worker.then((html)=>{
-        var result = JSON.parse(html);
-        that.results.push(result);
-    })
-    return worker;
+
+Spider.prototype.creatUrl = function (jd) {
+
+}
+
+Spider.prototype.end = function(callback){
+    return Promise.all(this.workerpromises).then(callback(results));
 };
 
 
