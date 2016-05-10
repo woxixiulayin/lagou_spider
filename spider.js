@@ -3,7 +3,7 @@ var request = require('request');
 //getHtml 是一个promise，使用promise.then来获得html
 var getHtml = function(url) {
     var options = {
-        url: url1,
+        url: url,
         headers: {
             'Accept': '*/*',
             'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
