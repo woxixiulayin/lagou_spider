@@ -37,11 +37,17 @@ Spider.prototype.setWorker = function (callback) {//从url获得body文本后调
 };
 Spider.prototype.addUrl = function (url){//每添加一个url，设置一个worker
     this.urls.push(url);
+    this.parseUrl(url);
+};
+Spider.prototype.parseUrl = function (url) {
     var that = this;
     getHtml(url).then((body) => {
             that.worker(body);//处理body
-        });
-};
+        }.then(function(result) {//删除url
+            var index = that.urls.indexOf(url);
+            that.urls.splice(index, 1);
+        }));
+}
 
 var url1 = "http://www.lagou.com/jobs/positionAjax.json?city=%E4%B8%8A%E6%B5%B7&kd=%E5%89%8D%E7%AB%AF";
 
