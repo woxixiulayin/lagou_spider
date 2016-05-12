@@ -8,7 +8,7 @@ var headers = {
             'X-MicrosoftAjax': 'Delta=true'
 };
 
-//getHtml 是一个promise，使用异步操作在promise.then中来处理获得html的body
+// //getHtml 是一个promise，使用异步操作在promise.then中来处理获得html的body
 var getHtml = function (url) {
     var options = {
         url: url,

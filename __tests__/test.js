@@ -1,4 +1,5 @@
 jest.unmock('../spider');
+jest.unmock('request');
 
 var spider = require('../spider');
 
@@ -8,7 +9,7 @@ describe('check funciton in spider.js', () => {
     getHtml(url1).then((info) => {
             console.log(info);
         });
-    it('check getHtml', () => {
+    // it('check getHtml', () => {
     
-    });
+    // });
 });
