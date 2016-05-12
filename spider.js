@@ -37,16 +37,21 @@ Spider.prototype.setWorker = function (callback) {//从url获得body文本后调
 };
 Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个worker
     this.urls.push(url);
-    this.parseUrl(url);
-};
-Spider.prototype.parseUrl = function (url) {
     var that = this;
-    getHtml(url).then((body) => {
-            that.worker(body);//处理body
-        }).then(function(result) {//删除url
-            var index = that.urls.indexOf(url);
-            that.urls.splice(index, 1);
+    this.getBody(url).then((body) => {
+        that.parseBody(body);//解析取得的body
+        that.removeUrl(url);//解析后删除url
     });
+};
+Spider.prototype.removeUrl = function (url) {
+    var index = this.urls.indexOf(url);
+    this.urls.splice(index, 1);
+}
+Spider.prototype.getBody = function (url) {
+    return getHtml(url);
+}
+Spider.prototype.parseBody = function (url) {
+    return this.worker(body);//处理body
 };
 
 module.exports.getHtml = getHtml;
