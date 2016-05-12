@@ -6,10 +6,10 @@ var headers = {
             'Cookie': 'ASP.NET_SessionId=zikhfrrprfylac454hgu342u',
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',
             'X-MicrosoftAjax': 'Delta=true'
-        }; 
+};
 
 //getHtml 是一个promise，使用异步操作在promise.then中来处理获得html的body
-var getHtml = function(url) {
+var getHtml = function (url) {
     var options = {
         url: url,
         headers: headers
@@ -17,25 +17,25 @@ var getHtml = function(url) {
 
     var promise = new Promise(function(resolved, reject) {
         var reqCallback = function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 resolved(body);
             } else {
                 console.log(error || response.statusCode);
             }
-        }
+        };
         request(options, reqCallback);
     });
     return promise;
 };
 
-function Spider () {
+function Spider() {
     this.urls = [];
-};
+}
 
 Spider.prototype.setWorker = function (callback) {//从url获得body文本后调用this.worker进行后续操作
     this.worker = callback;
 };
-Spider.prototype.addUrl = function (url){//每添加一个url，设置一个worker
+Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个worker
     this.urls.push(url);
     this.parseUrl(url);
 };
@@ -46,8 +46,8 @@ Spider.prototype.parseUrl = function (url) {
         }.then(function(result) {//删除url
             var index = that.urls.indexOf(url);
             that.urls.splice(index, 1);
-        }));
-}
+    }));
+};
 
 module.exports.getHtml = getHtml;
 module.exports.Spider = Spider;
