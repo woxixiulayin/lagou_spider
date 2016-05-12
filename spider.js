@@ -43,10 +43,10 @@ Spider.prototype.parseUrl = function (url) {
     var that = this;
     getHtml(url).then((body) => {
             that.worker(body);//处理body
-        }.then(function(result) {//删除url
+        }).then(function(result) {//删除url
             var index = that.urls.indexOf(url);
             that.urls.splice(index, 1);
-    }));
+    });
 };
 
 module.exports.getHtml = getHtml;
