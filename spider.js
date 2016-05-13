@@ -33,24 +33,32 @@ function Spider() {
 }
 
 Spider.prototype.setWorker = function (callback) {//从url获得body文本后调用this.worker进行后续操作
-    this.worker = callback;
+    this.worker = function (body) {
+       var promise = new Promise(function(resolved, reject) {
+                callback(body);
+            });
+        return promise;
+    }
 };
 Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个worker
     this.urls.push(url);
     var that = this;
-    this.getBody(url).then((body) => {
-        that.parseBody(body);//解析取得的body
-        that.removeUrl(url);//解析后删除url
-    });
+    this.getBody(url)
+        .then((body) => {
+            that.parseBody(body);
+        })//解析body
+        .then((res) => {
+            that.removeUrl(url);//解析后删除url
+        });
 };
 Spider.prototype.removeUrl = function (url) {
     var index = this.urls.indexOf(url);
     this.urls.splice(index, 1);
-}
+};
 Spider.prototype.getBody = function (url) {
     return getHtml(url);
-}
-Spider.prototype.parseBody = function (url) {
+};
+Spider.prototype.parseBody = function (body) {
     return this.worker(body);//处理body
 };
 
