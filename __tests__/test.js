@@ -19,9 +19,12 @@ describe('check funciton in spider.js', () => {
 
 describe('check funciton in Lagouspider.js', () => {
     var lagouspider = new Lagouspider({city:"上海",kd:"前端"});
-    it('check Lagouspider createurl', () => {
+    pit('check Lagouspider', () => {
         var jd = {city:"上海",kd:"前端"}
         var url = lagouspider.createUrl(jd);
         expect(url).toBe(urlExample);
+        return lagouspider.addUrl(url).then(() => {
+            console.log(lagouspider.results[0]);
+        });
         });
 });

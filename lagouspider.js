@@ -1,9 +1,17 @@
 var Spider = require('./spider').Spider;
 
+
+function CityJobcount(city, jobcount) {
+    this.city = city;
+    this.jobcount = jobcount;
+}
+
 function LagouSpider (jds) {
     Spider.call(this);
     this.jds = jds;
+    this.results = [];//返回最终取到的结果
     this.workers = [];
+    this.setWorker(this.getJdinfo);
 }
 LagouSpider.prototype = Object.create(Spider.prototype);
 LagouSpider.prototype.constructor = LagouSpider;
@@ -22,8 +30,10 @@ LagouSpider.prototype.createUrls = function (jds) {
 LagouSpider.prototype.getJdinfo = function (body) {
     var that = this;
     var worker = new Promise(function(resolved, reject) {
-        var result = JSON.parse(body);
-        resolved(result);
+        var cityinfo = JSON.parse(body);
+        var cityjobcount = CityJobcount(cityinfo.content.locationInfo.city, cityinfo.content.totalCount);
+        that.results.push(cityjobcount);
+        resolved(cityjobcount);
     });
     this.workers.push(worker);
     return worker;

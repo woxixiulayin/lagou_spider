@@ -43,7 +43,7 @@ Spider.prototype.setWorker = function (callback) {//从url获得body文本后调
 Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个worker
     this.urls.push(url);
     var that = this;
-    this.getBody(url)
+    return this.getBody(url)
         .then((body) => {
             that.parseBody(body);
         })//解析body
