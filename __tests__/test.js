@@ -24,7 +24,7 @@ describe('check funciton in Lagouspider.js', () => {
         var url = lagouspider.createUrl(jd);
         expect(url).toBe(urlExample);
         return lagouspider.addUrl(url).then(() => {
-            console.log(lagouspider.results[0]);
+            console.log(lagouspider.results);
         });
         });
 });

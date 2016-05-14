@@ -1,10 +1,10 @@
 var Spider = require('./spider').Spider;
 
 
-function CityJobcount(city, jobcount) {
+function CityJobcount (city, jobcount) {
     this.city = city;
     this.jobcount = jobcount;
-}
+};
 
 function LagouSpider (jds) {
     Spider.call(this);
@@ -31,7 +31,9 @@ LagouSpider.prototype.getJdinfo = function (body) {
     var that = this;
     var worker = new Promise(function(resolved, reject) {
         var cityinfo = JSON.parse(body);
-        var cityjobcount = CityJobcount(cityinfo.content.locationInfo.city, cityinfo.content.totalCount);
+        var city = cityinfo.content.positionResult.locationInfo.city;
+        var jobcount = cityinfo.content.positionResult.totalCount;
+        var cityjobcount = new CityJobcount(city, jobcount);
         that.results.push(cityjobcount);
         resolved(cityjobcount);
     });
