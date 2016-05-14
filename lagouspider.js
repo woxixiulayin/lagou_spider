@@ -47,7 +47,7 @@ LagouSpider.prototype.end = function (callback) {//callback(results)
     this.createUrls.forEach(function(url, index) {
         that.addUrl(url);//处理所有的url
     });
-    return promises.all(callback);//等待所有的url结束
+    return promises.all(callback.call(that));//等待所有的url结束
 }
 
 module.exports.LagouSpider = LagouSpider;

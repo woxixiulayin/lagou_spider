@@ -33,9 +33,10 @@ function Spider() {
 }
 
 Spider.prototype.setWorker = function (callback) {//从url获得body文本后调用this.worker进行后续操作
+    var that = this;
     this.worker = function (body) {
        var promise = new Promise(function(resolved, reject) {
-                callback(body);
+                callback.call(that, body);
             });
         return promise;
     }
