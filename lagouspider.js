@@ -51,3 +51,4 @@ LagouSpider.prototype.end = function (callback) {//callback(results)
 }
 
 module.exports.LagouSpider = LagouSpider;
+module.exports.CityJobcount = CityJobcount;
