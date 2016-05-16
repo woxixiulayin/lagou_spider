@@ -13,12 +13,13 @@ function createjds (job) {
     })
 }
 
-var display = {
+var display = function () {
     var maxhight = 600;
-    var maxhobcount;
-    function createJobDiv(jobcount) {//job信息div圆柱
+    var maxjobcount = 0;
+    function createJobCol(cityjobcount) {//job信息圆柱
         var div = document.createElement("DIV");
         div.className = "job-count";
+        div.city = 
         div.style.height = getJobDivHight(jobcount);
 
     };
@@ -28,7 +29,7 @@ var cities = ["全国","北京","上海","广州","深圳","武汉"];
  
  var TEST_JONDATA = {job: "前端",
                 data:[
-                {city:"全国",jobcount:},
+                {city:"全国",jobcount:12546},
                 {city:"北京",jobcount:3456},
                 {city:"上海",jobcount:3090},
                 {city:"广州",jobcount:2000},
