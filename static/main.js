@@ -13,6 +13,22 @@ function createjds (job) {
     })
 }
 
+function Ajax(req, url, isasync, callback) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = ActiveXObject("MicrosoftAjax");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            callback(xmlhttp.responseText);
+        }
+    };
+    xmlhttp.open(req, url, isasync);
+    xmlhttp.send();
+}
+
 var display = function () {
     var maxhight = 600;
     var maxjobcount = 0;
