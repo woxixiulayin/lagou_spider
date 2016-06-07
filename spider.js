@@ -34,7 +34,7 @@ function Spider() {
 
 Spider.prototype.setWorker = function (callback) {//从url获得body文本后调用this.worker进行后续操作
     var that = this;
-    this.worker = function (body) {
+    this.parseBody = function (body) {
        var promise = new Promise(function(resolved, reject) {
                 callback.call(that, body);
             });
@@ -59,9 +59,7 @@ Spider.prototype.removeUrl = function (url) {
 Spider.prototype.getBody = function (url) {
     return getHtml(url);
 };
-Spider.prototype.parseBody = function (body) {
-    return this.worker(body);//处理body
-};
+
 
 module.exports.getHtml = getHtml;
 module.exports.Spider = Spider;

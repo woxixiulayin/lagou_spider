@@ -23,6 +23,7 @@ describe('check funciton in Lagouspider.js', () => {
     var jds = cities.map((item, index, array) => {
         return new CityJobcount(item, "前端");
     });
+
     var lagouspider = new Lagouspider(jds);
     pit('check Lagouspider one url', () => {
         var jd = new CityJobcount("上海","前端");
@@ -33,7 +34,7 @@ describe('check funciton in Lagouspider.js', () => {
         });
         });
     pit('check LagouSpider urls', () => {
-        lagouspider.end(() => {
+        return lagouspider.end().then(() => {
             console.log(lagouspider.results);
         });
     });

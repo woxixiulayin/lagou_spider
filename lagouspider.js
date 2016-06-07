@@ -12,7 +12,7 @@ function LagouSpider (jds) {
     this.jds = jds;
     this.results = [];//返回最终取到的结果
     this.workers = [];
-    this.setWorker(this.getJdinfo);
+    this.parseBody = this.getJdinfo;
 }
 LagouSpider.prototype = Object.create(Spider.prototype);
 LagouSpider.prototype.constructor = LagouSpider;
@@ -43,13 +43,13 @@ LagouSpider.prototype.getJdinfo = function (body) {
     return worker;
 }
 
-LagouSpider.prototype.end = function (callback) {//callback(results)
+LagouSpider.prototype.end = function () {//callback(results)
     var promises = this.workers;
     var that = this;
     this.createUrls().forEach(function(url, index) {
-        that.addUrl(url);//处理所有的url
+        that.addUrl.call(that, url);//处理所有的url
     });
-    return promises.all(callback.call(that));//等待所有的url结束
+    return Promise.all(promises);
 }
 
 module.exports.LagouSpider = LagouSpider;
