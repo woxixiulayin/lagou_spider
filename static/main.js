@@ -7,7 +7,7 @@ function CityJobcount (city, jobcount) {
     this.jobcount = jobcount;
 };
 
-function Ajax(req, url, isasync, callback) {
+function Ajax(req, url, callback) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -19,15 +19,27 @@ function Ajax(req, url, isasync, callback) {
             callback(xmlhttp.responseText);
         }
     };
-    xmlhttp.open(req, url, isasync);
+    xmlhttp.open(req, url, true);
     xmlhttp.send();
 }
 
-function sendJds(jds) {
-    var getJdinfos = function (responseText) {
-        console.log(responseText);
+var getJSON = function(url) {
+    var promise = new Promise(function (resolve, reject) {
+        var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = ActiveXObject("MicrosoftAjax");
     }
-
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            resolve(xmlhttp.responseText);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    });
+    return promise;
 }
 
 // var display = function () {
@@ -42,24 +54,21 @@ function sendJds(jds) {
 //     };
 
 // };
-var cities = ["全国","北京","上海","广州","深圳","武汉"]; 
- 
- var TEST_JONDATA = {job: "前端",
-                data:[
-                {city:"全国",jobcount:12546},
-                {city:"北京",jobcount:3456},
-                {city:"上海",jobcount:3090},
-                {city:"广州",jobcount:2000},
-                {city:"深圳",jobcount:2500},
-                {city:"武汉",jobcount:1500},
-                ]};
+var inputjob = $("job");
+var inputsubmit = $("submit");
 
-var inputjob = document.getElementsByName("job")[0];
-
+function getCityJobcounts() {
+    var cityjobcounts = [];
+    var job = inputjob.value;
+    var url = '/job/'+job;
+    console.log(url);
+    getJSON(url).then((res) => {
+        console.log(res);
+    });
+}
 
 inputjob.onkeydown = function (event) {
     if(event.target != this || event.keyCode != 13) return;
     console.log(inputjob.value);
-    var jds = createjds(inputjob.value);
-    console.log(jds);
+    getCityJobcounts();
 }
