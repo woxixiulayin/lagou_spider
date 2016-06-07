@@ -5,6 +5,8 @@ jest.unmock('request');
 var spider = require('../spider');
 var Lagouspider = require('../lagouspider').LagouSpider;
 var urlExample = "http://www.lagou.com/jobs/positionAjax.json?city=%E4%B8%8A%E6%B5%B7&kd=%E5%89%8D%E7%AB%AF";
+var CityJobcount =require('../lagouspider').CityJobcount;
+var cities = ["全国","北京","上海","广州","深圳","武汉"]; 
 
 describe('check funciton in spider.js', () => {
     var getHtml = spider.getHtml;
@@ -18,13 +20,21 @@ describe('check funciton in spider.js', () => {
 });
 
 describe('check funciton in Lagouspider.js', () => {
-    var lagouspider = new Lagouspider({city:"上海",kd:"前端"});
-    pit('check Lagouspider', () => {
-        var jd = {city:"上海",kd:"前端"}
+    var jds = cities.map((item, index, array) => {
+        return new CityJobcount(item, "前端");
+    });
+    var lagouspider = new Lagouspider(jds);
+    pit('check Lagouspider one url', () => {
+        var jd = new CityJobcount("上海","前端");
         var url = lagouspider.createUrl(jd);
         expect(url).toBe(urlExample);
         return lagouspider.addUrl(url).then(() => {
             console.log(lagouspider.results);
         });
         });
+    pit('check LagouSpider urls', () => {
+        lagouspider.end(() => {
+            console.log(lagouspider.results);
+        });
+    });
 });
