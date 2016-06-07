@@ -27,7 +27,7 @@ LagouSpider.prototype.createUrls = function () {
         return that.createUrl(jd);
     });
 }
-LagouSpider.prototype.getJdinfo = function (body) {
+LagouSpider.prototype.getJdinfo = function (body) {//url处理函数
     var that = this;
     var worker = new Promise(function(resolved, reject) {
         var cityinfo = JSON.parse(body);
@@ -45,9 +45,9 @@ LagouSpider.prototype.end = function () {
     var promises = [];
     var that = this;
     this.createUrls().forEach(function(url, index) {
-        promises.push(that.addUrl.call(that, url));//处理所有的url
+        promises.push(that.addUrl.call(that, url));//组合多个处理url的promise
     });
-    return Promise.all(promises);
+    return Promise.all(promises);//包装所有promise为一个新的promise
 }
 
 module.exports.LagouSpider = LagouSpider;
