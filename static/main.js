@@ -7,22 +7,6 @@ function CityJobcount (city, jobcount) {
     this.jobcount = jobcount;
 };
 
-function Ajax(req, url, callback) {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = ActiveXObject("MicrosoftAjax");
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            callback(xmlhttp.responseText);
-        }
-    };
-    xmlhttp.open(req, url, true);
-    xmlhttp.send();
-}
-
 var getJSON = function(url) {
     var promise = new Promise(function (resolve, reject) {
         var xmlhttp;
@@ -42,18 +26,6 @@ var getJSON = function(url) {
     return promise;
 }
 
-// var display = function () {
-//     var maxhight = 600;
-//     var maxjobcount = 0;
-//     function createJobCol(cityjobcount) {//job信息圆柱
-//         var div = document.createElement("DIV");
-//         div.className = "job-count";
-//         div.city = 
-//         div.style.height = getJobDivHight(jobcount);
-
-//     };
-
-// };
 var inputjob = $("job");
 var inputsubmit = $("submit");
 var jobinfotable = $("jobinfotable");
