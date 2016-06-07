@@ -56,19 +56,34 @@ var getJSON = function(url) {
 // };
 var inputjob = $("job");
 var inputsubmit = $("submit");
+var jobinfotable = $("jobinfotable");
 
 function getCityJobcounts() {
     var cityjobcounts = [];
     var job = inputjob.value;
     var url = '/job/'+job;
-    console.log(url);
-    getJSON(url).then((res) => {
-        console.log(res);
+    return getJSON(url);
+}
+
+function diplapyJobinfo(cityjobcounts) {
+    jobinfotable.removeAttribute("hidden");
+    jobinfotable.innerHTML = "";
+    cityjobcounts.forEach((item, index, array) => {
+        var tr = document.createElement("tr");
+        var tdcity = document.createElement("td");
+        var tdcounts = document.createElement("td");
+        tdcity.innerHTML = item.city;
+        tdcounts.innerHTML = item.jobcount;
+        tr.appendChild(tdcity);
+        tr.appendChild(tdcounts);
+        jobinfotable.appendChild(tr);
     });
 }
 
 inputjob.onkeydown = function (event) {
     if(event.target != this || event.keyCode != 13) return;
-    console.log(inputjob.value);
-    getCityJobcounts();
+    getCityJobcounts().then((res) => {
+        var cityjobcounts = JSON.parse(res);
+        diplapyJobinfo(cityjobcounts);    
+    });
 }
