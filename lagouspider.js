@@ -11,7 +11,6 @@ function LagouSpider (jds) {
     Spider.call(this);
     this.jds = jds;
     this.results = [];//返回最终取到的结果
-    this.workers = [];
     this.parseBody = this.getJdinfo;
 }
 LagouSpider.prototype = Object.create(Spider.prototype);
@@ -39,15 +38,14 @@ LagouSpider.prototype.getJdinfo = function (body) {
         that.results.push(cityjobcount);
         resolved(cityjobcount);
     });
-    this.workers.push(worker);
     return worker;
 }
 
-LagouSpider.prototype.end = function () {//callback(results)
-    var promises = this.workers;
+LagouSpider.prototype.end = function () {
+    var promises = [];
     var that = this;
     this.createUrls().forEach(function(url, index) {
-        that.addUrl.call(that, url);//处理所有的url
+        promises.push(that.addUrl.call(that, url));//处理所有的url
     });
     return Promise.all(promises);
 }
