@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+var createjds = require("./utils.js").createjds;
+var LagouSpider = require("./lagouspider.js").LagouSpider;
 var express = require("express");
 var app = express();
 
@@ -11,5 +13,11 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
     var job = req.body.job;
+    var jds = createjds(job);
+    console.log(jds);
+    var lagouspider = new LagouSpider(jds);
+    lagouspider.end().then(() => {
+        res.send(JSON.stringify(lagouspider.results));
+    });
 });
 app.listen('8080');

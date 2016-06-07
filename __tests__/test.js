@@ -1,12 +1,13 @@
 jest.unmock('../spider');
 jest.unmock('../lagouspider');
 jest.unmock('request');
+jest.unmock('../utils');
 
 var spider = require('../spider');
 var Lagouspider = require('../lagouspider').LagouSpider;
 var urlExample = "http://www.lagou.com/jobs/positionAjax.json?city=%E4%B8%8A%E6%B5%B7&kd=%E5%89%8D%E7%AB%AF";
 var CityJobcount =require('../lagouspider').CityJobcount;
-var cities = ["南京","杭州","北京","上海","广州","深圳","武汉"]; 
+var CITIES = require('../utils').CITIES;
 
 describe('check funciton in spider.js', () => {
     var getHtml = spider.getHtml;
@@ -20,7 +21,7 @@ describe('check funciton in spider.js', () => {
 });
 
 describe('check funciton in Lagouspider.js', () => {
-    var jds = cities.map((item, index, array) => {
+    var jds = CITIES.map((item, index, array) => {
         return new CityJobcount(item, "前端");
     });
 

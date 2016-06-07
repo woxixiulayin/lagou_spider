@@ -7,12 +7,6 @@ function CityJobcount (city, jobcount) {
     this.jobcount = jobcount;
 };
 
-function createjds (job) {
-    return cities.map((item, index, arrar) => {
-        return new CityJobcount(item, job);
-    })
-}
-
 function Ajax(req, url, isasync, callback) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
