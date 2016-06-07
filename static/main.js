@@ -29,18 +29,25 @@ function Ajax(req, url, isasync, callback) {
     xmlhttp.send();
 }
 
-var display = function () {
-    var maxhight = 600;
-    var maxjobcount = 0;
-    function createJobCol(cityjobcount) {//job信息圆柱
-        var div = document.createElement("DIV");
-        div.className = "job-count";
-        div.city = 
-        div.style.height = getJobDivHight(jobcount);
+function sendJds(jds) {
+    var getJdinfos = function (responseText) {
+        console.log(responseText);
+    }
 
-    };
+}
 
-};
+// var display = function () {
+//     var maxhight = 600;
+//     var maxjobcount = 0;
+//     function createJobCol(cityjobcount) {//job信息圆柱
+//         var div = document.createElement("DIV");
+//         div.className = "job-count";
+//         div.city = 
+//         div.style.height = getJobDivHight(jobcount);
+
+//     };
+
+// };
 var cities = ["全国","北京","上海","广州","深圳","武汉"]; 
  
  var TEST_JONDATA = {job: "前端",
@@ -53,7 +60,8 @@ var cities = ["全国","北京","上海","广州","深圳","武汉"];
                 {city:"武汉",jobcount:1500},
                 ]};
 
-inputjob = $('inputjob');
+var inputjob = document.getElementsByName("job")[0];
+
 
 inputjob.onkeydown = function (event) {
     if(event.target != this || event.keyCode != 13) return;

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>拉勾网小爬虫展示</title>
-    <link rel="stylesheet" type="text/css" href="static/style.css">
-</head>
-<body>
-<div id="container">
-    <div id="header">
-        <h1>拉勾网爬虫</h1>
-        <div id="searchbar"><input type="input" id="inputjob" placeholder="输入要查询的职位"></input></div>
-    </div>
-    <div id="jobinfo">
-    </div>
-    <script type="text/javascript" src="static/main.js"></script>>
-</div>
-</body>
+    <head>
+        <title>拉勾网小爬虫展示</title>
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1>拉勾网爬虫</h1>
+                <form name="searchbar" method="post" action="/">
+                <input type="input" name="job" placeholder="输入要查询的职位">
+                <input type="submit" value="确认">
+                </form>
+            </div>
+            <div id="jobinfo">
+            </div>
+            <script type="text/javascript" src="static/main.js"></script>>
+        </div>
+    </body>
 </html>
