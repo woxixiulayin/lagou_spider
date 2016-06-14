@@ -40,6 +40,14 @@ function getCityJobcounts() {
 function diplapyJobinfo(cityjobcounts) {
     jobinfotable.removeAttribute("hidden");
     jobinfotable.innerHTML = "";
+    var tr = document.createElement("tr");
+    var tdcity = document.createElement("td");
+    var tdcounts = document.createElement("td");
+        tdcity.innerHTML = "城市";
+        tdcounts.innerHTML = "工作数量";
+        tr.appendChild(tdcity);
+        tr.appendChild(tdcounts);
+        jobinfotable.appendChild(tr);
     cityjobcounts.forEach((item, index, array) => {
         var tr = document.createElement("tr");
         var tdcity = document.createElement("td");

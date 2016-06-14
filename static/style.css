@@ -28,3 +28,7 @@
 #jobinfotable {
     margin: 30px auto;
 }
+
+#jobinfotable td {
+    width: 70px;
+}
