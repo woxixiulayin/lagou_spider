@@ -7,7 +7,7 @@ node server.js
 打开[http://localhost:8080/](http://localhost:8080/)
 
 ####技术栈
-express\js\AJAX\canvas
+express\AJAX\
 
 ####展示页面：
 后续补充
