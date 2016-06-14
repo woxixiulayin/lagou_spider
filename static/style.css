@@ -18,6 +18,17 @@
     padding: 5px 5px;
 }
 
+#header input {
+    height: 15px;
+    margin-top: 10px;
+}
+
+#submit {
+    height: 21px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 40px;
+}
 
 #jobinfo {
     margin: 10px 0;

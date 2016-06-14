@@ -29,6 +29,7 @@ var getJSON = function(url) {
 var inputjob = $("job");
 var inputsubmit = $("submit");
 var jobinfotable = $("jobinfotable");
+var submit = $("submit");
 
 function getCityJobcounts() {
     var cityjobcounts = [];
@@ -65,5 +66,12 @@ inputjob.onkeydown = function (event) {
     getCityJobcounts().then((res) => {
         var cityjobcounts = JSON.parse(res);
         diplapyJobinfo(cityjobcounts);    
+    });
+}
+
+submit.onclick = function () {
+    getCityJobcounts().then((res) => {
+        var cityjobcounts = JSON.parse(res);
+        diplapyJobinfo(cityjobcounts);
     });
 }
