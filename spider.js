@@ -4,7 +4,7 @@ var headers = {
             'Accept': '*/*',
             'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Cookie': 'ASP.NET_SessionId=zikhfrrprfylac454hgu342u',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36',
             'X-MicrosoftAjax': 'Delta=true'
 };
 

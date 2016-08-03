@@ -1,5 +1,5 @@
 var CityJobcount = require("./lagouspider.js").CityJobcount;
-var CITIES = ["南京","杭州","北京","上海","广州","深圳","武汉", "苏州", "西安"];
+var CITIES = ["南京","杭州","北京","上海","广州","深圳","武汉", "苏州", "西安", "成都"];
 
 
 function createjds (job) {

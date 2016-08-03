@@ -36,6 +36,7 @@ LagouSpider.prototype.getJdinfo = function (body) {//url处理函数
         var cityjobcount = new CityJobcount(city, that.jds[0].job);
         cityjobcount.jobcount = jobcount;
         that.results.push(cityjobcount);
+        console.log(cityjobcount);
         resolved(cityjobcount);
     });
     return worker;

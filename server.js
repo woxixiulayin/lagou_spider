@@ -14,7 +14,6 @@ app.get("/", function (req, res) {
 app.get("/job/:job", function (req, res) {
     var job = req.params.job;
     var jds = createjds(job);
-    console.log(jds);
     var lagouspider = new LagouSpider(jds);
     lagouspider.end().then(() => {
         res.send(JSON.stringify(lagouspider.results));
