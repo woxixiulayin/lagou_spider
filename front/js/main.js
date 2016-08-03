@@ -52,7 +52,7 @@ function diplapyJobinfo(cityjobcounts) {
                    });
     });
     console.log(cityjob_chart);
-    
+
     // 指定图表的配置项和数据
     var option = {
     title : {
@@ -66,7 +66,7 @@ function diplapyJobinfo(cityjobcounts) {
     legend: {
         orient: 'horizontal',
         left: 'center',
-        top: "40px";
+        top: "40px",
         data: cities
     },
     series : [
@@ -85,7 +85,10 @@ function diplapyJobinfo(cityjobcounts) {
             }
         }
     ]
-};
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+}
 
 inputjob.onkeydown = function(event) {
     if (event.target != this || event.keyCode != 13) return;
