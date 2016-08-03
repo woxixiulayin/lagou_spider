@@ -48,9 +48,6 @@ Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个wor
         .then((body) => {
             that.parseBody(body);
         });//解析body
-        // .then((res) => {
-        //     that.removeUrl(url);//解析后删除url
-        // });
 };
 Spider.prototype.removeUrl = function (url) {
     var index = this.urls.indexOf(url);

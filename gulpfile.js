@@ -5,19 +5,11 @@ var gulp = require('gulp')
 gulp.task('serve', function () {
 
     browserSync.init({
-        proxy: "localhost:8080"
+        proxy: "localhost:8082"
     });
 
-    // 从这个项目的根目录启动服务器
-    browserSync({
-        server: {
-            baseDir: "./"
-        }
-    });
-
-    // 添加 browserSync.reload 到任务队列里
     // 所有的浏览器重载后任务完成。
-    gulp.watch(["**/*.js","**/*.css","**/*.html"], browserSync.reload);
+    gulp.watch(["front/**"], browserSync.reload);
 });
 
 gulp.task('default', ['serve']);

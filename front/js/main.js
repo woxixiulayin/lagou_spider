@@ -49,7 +49,7 @@ function diplapyJobinfo(cityjobcounts) {
         tr.appendChild(tdcity);
         tr.appendChild(tdcounts);
         jobinfotable.appendChild(tr);
-    cityjobcounts.forEach((item, index, array) => {
+        cityjobcounts.forEach((item, index, array) => {
         var tr = document.createElement("tr");
         var tdcity = document.createElement("td");
         var tdcounts = document.createElement("td");
