@@ -14,7 +14,7 @@ a:hover
 header
 {
     width: 100%;
-    height: 200px;
+    height: 180px;
 }
 
 h1
@@ -71,5 +71,20 @@ h1
     width: 40px;
     vertical-align: middle;
 }
+
+#warp
+{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#chart
+{
+    margin: 10px auto;
+    height: 600px;
+    width: 500px;
+}
+
 
 
