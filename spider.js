@@ -1,4 +1,5 @@
 var request = require('request');
+var superagent = require('superagent');
 
 var headers = {
             'Accept': '*/*',
@@ -16,14 +17,23 @@ var getHtml = function (url) {
     };
 
     var promise = new Promise(function(resolved, reject) {
-        var reqCallback = function callback(error, response, body) {
-            if (!error && response.statusCode === 200) {
-                resolved(body);
-            } else {
-                console.log(error || response.statusCode);
-            }
-        };
-        request(options, reqCallback);
+        // var reqCallback = function callback(error, response, body) {
+        //     if (!error && response.statusCode === 200) {
+        //         resolved(body);
+        //     } else {
+        //         console.log(error || response.statusCode);
+        //     }
+        // };
+        // request(options, reqCallback);
+        superagent.get(url)
+            .end( (err, res) => {
+                if (err || !res.ok) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    resolved(res.text);
+                }
+            });
     });
     return promise;
 };

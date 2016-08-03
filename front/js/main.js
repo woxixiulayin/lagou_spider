@@ -74,7 +74,7 @@ function diplapyJobinfo(cityjobcounts) {
             name: '拉勾网',
             type: 'pie',
             radius : '55%',
-            center: ['50%', '50%'],
+            center: ['50%', '40%'],
             data: cityjob_chart,
             itemStyle: {
                 emphasis: {
