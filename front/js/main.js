@@ -52,43 +52,11 @@ function diplapyJobinfo(cityjobcounts) {
                    });
     });
     console.log(cityjob_chart);
+    
     // 指定图表的配置项和数据
-//     var option = {
-//     title : {
-//         text: '拉勾网' + job_name + '工作分布',
-//         x:'center'
-//     },
-//     tooltip : {
-//         trigger: 'item',
-//         formatter: "{a} <br/>{b} : {c} ({d}%)"
-//     },
-//     legend: {
-//         orient: 'horizontal',
-//         left: 'left',
-//         top: "10px";
-//         data: cities
-//     },
-//     series : [
-//         {
-//             name: '拉勾网',
-//             type: 'pie',
-//             radius : '55%',
-//             center: ['50%', '60%'],
-//             data: cityjob_chart,
-//             itemStyle: {
-//                 emphasis: {
-//                     shadowBlur: 10,
-//                     shadowOffsetX: 0,
-//                     shadowColor: 'rgba(0, 0, 0, 0.5)'
-//                 }
-//             }
-//         }
-//     ]
-// };
-option = {
+    var option = {
     title : {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
+        text: '拉勾网' + job_name + '工作分布',
         x:'center'
     },
     tooltip : {
@@ -98,22 +66,16 @@ option = {
     legend: {
         orient: 'horizontal',
         left: 'center',
-        top: "55px",
-        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        top: "40px";
+        data: cities
     },
     series : [
         {
-            name: '访问来源',
+            name: '拉勾网',
             type: 'pie',
             radius : '55%',
             center: ['50%', '50%'],
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:234, name:'联盟广告'},
-                {value:135, name:'视频广告'},
-                {value:1548, name:'搜索引擎'}
-            ],
+            data: cityjob_chart,
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -125,10 +87,6 @@ option = {
     ]
 };
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);    
-}
-
 inputjob.onkeydown = function(event) {
     if (event.target != this || event.keyCode != 13) return;
     getCityJobcounts().then((res) => {
@@ -138,8 +96,8 @@ inputjob.onkeydown = function(event) {
 }
 
 submit.onclick = function() {
-        diplapyJobinfo([]);
     getCityJobcounts().then((res) => {
         var cityjobcounts = JSON.parse(res);
+        diplapyJobinfo(cityjobcounts);
     });
 }
