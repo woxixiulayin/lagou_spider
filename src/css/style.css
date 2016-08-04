@@ -50,7 +50,7 @@ h1
 
 #search_bar
 {
-    margin: 6px 0;
+    padding: 6px 0;
 }
 #input_job
 {   
@@ -92,9 +92,10 @@ h1
     width: 600px;
 }
 
-.city_bar
+.header-bottom
 {
-    margin:5px auto;
+    margin:0 auto;
+    padding: 5px 0 8px 0;
     text-align: center;
     font-size: 12px;
     color: white;
@@ -109,10 +110,10 @@ h1
     display: inline-block;
     height: 1.6em;
     line-height: 1.6em;
-    padding-left: 0.9em;
+    padding: 0 0.8em;
     background: green;
     vertical-align: middle;
-    margin:.5em .6em;
+    margin:0 1em;
 }
 .city_span:after
 {   
@@ -138,19 +139,19 @@ h1
     background-size: 1em 1em;
     background-position: center;
     vertical-align: middle;
-    margin:.5em .3em;
+    margin:0 .3em;
 }
 .remove_span
 {
     float: right;
-    margin-left: .5em;
+    margin-left: .4em;
     height: 1.6em;
     width: 1.6em;
     background-color: transparent;
     background-image: url(../img/删除.svg);
     background-repeat: no-repeat;
     background-size: 1em 1em;
-    background-position: .3em .3em;
+    background-position: 1em .3em;
 }
 .city_input
 {
@@ -159,5 +160,5 @@ h1
     line-height: 1.6em;
     padding-left: 0.2em;
     vertical-align: middle;
-    margin:.5em .6em; 
+    margin:0 .6em; 
 }

@@ -1,14 +1,8 @@
-function $(selectors) {
-    return document.querySelector(selectors);
-}
-
-var inputjob = $("#input_job");
-var jobinfotable = $("#jobinfotable");
-var submit = $("#submit");
-var myChart = echarts.init($('#chart'));
+var search_cities = ["北京", "上海", "广州", "深圳", "杭州"];
 
 function diplapyJobinfo(jds) {
-    var position = inputjob.value,
+    var myChart = echarts.init(document.getElementById("chart"));
+    var position = $("#inputjob").text(),
         cities = [],
         jd_chart = [];
 
@@ -58,8 +52,8 @@ function diplapyJobinfo(jds) {
 
 function getInputdata () {
     return {
-        position: inputjob.value,
-        cities: ["北京", "上海"]
+        position: $("#inputjob").text(),
+        cities: search_cities
     }
 };
 
@@ -85,14 +79,6 @@ function showResult() {
     fetchJds(getInputdata()).then(function (data) {
         console.log(data);
         diplapyJobinfo(data);
+        $("#city_bar").slideUp(500);
     })
-}
-
-inputjob.onkeydown = function(event) {
-    if (event.keyCode != 13) return;
-    showResult();
-}
-
-submit.onclick = function() {
-    showResult();
 }
