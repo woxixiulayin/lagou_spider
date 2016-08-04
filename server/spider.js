@@ -33,7 +33,7 @@ Spider.prototype = {
     getData: function (html) {
         let positionResult = JSON.parse(html).content.positionResult,
             //"全部"对应于总职位数,即没有指明城市时
-            city = positionResult.locationInfo.city || '全部',
+            city = positionResult.locationInfo.city,
             count = positionResult.totalCount,
             jd = new Jd(city, this.para.position, count);
         return jd;
@@ -45,8 +45,6 @@ Spider.prototype = {
             promises = [],
             that = this;
 
-        //爬取职位总数据
-        this.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd");
         //爬取单个城市
         para.cities.forEach( (city, index) => {
             that.urls.push(encodeURI("http://www.lagou.com/jobs/positionAjax.json?kd="+ para.position + "&city=" + city));

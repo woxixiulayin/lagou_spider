@@ -56,14 +56,14 @@ function diplapyJobinfo(jds) {
 }
 
 
-var getInputdata = function () {
+function getInputdata () {
     return {
         position: inputjob.value,
         cities: ["北京", "上海"]
     }
 };
 
-var fetchJds = function(inputdata) {
+function fetchJds(inputdata) {
     return fetch("/search", {
         method: "POST",
         headers: {
@@ -81,17 +81,18 @@ var fetchJds = function(inputdata) {
     });
 }
 
-// inputjob.onkeydown = function(event) {
-//     if (event.target != this || event.keyCode != 13) return;
-//     getCityJobcounts().then((res) => {
-//         var cityjobcounts = JSON.parse(res);
-//         diplapyJobinfo(cityjobcounts);
-//     });
-// }
-
-submit.onclick = function() {
+function showResult() {
     fetchJds(getInputdata()).then(function (data) {
         console.log(data);
         diplapyJobinfo(data);
     })
+}
+
+inputjob.onkeydown = function(event) {
+    if (event.keyCode != 13) return;
+    showResult();
+}
+
+submit.onclick = function() {
+    showResult();
 }

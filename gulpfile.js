@@ -29,7 +29,7 @@ gulp.task('observer', () => {
         myserver.kill('SIGHUP');
         myserver = server();
         browserSync.reload();
-    }
+        };
     gulp.watch(["app.js", "server/*.js"], reboot);
 });
 
