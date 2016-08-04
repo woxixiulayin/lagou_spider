@@ -52,12 +52,13 @@ function diplapyJobinfo(jds) {
 
 function getInputdata () {
     return {
-        position: $("#inputjob").text(),
+        position: document.getElementById("input_job").innerHtml,
         cities: search_cities
     }
 };
 
 function fetchJds(inputdata) {
+    console.log("inputdata: " + JSON.stringify(inputdata));
     return fetch("/search", {
         method: "POST",
         headers: {

@@ -78,7 +78,7 @@ h1
     background-size: 23px 23px;
 }
 
-#warp
+#wrap
 {
     width: 1000px;
     height: 100%;
@@ -110,7 +110,7 @@ h1
     display: inline-block;
     height: 1.6em;
     line-height: 1.6em;
-    padding: 0 0.8em;
+    padding: 0 0.7em;
     background: green;
     vertical-align: middle;
     margin:0 1em;
@@ -144,14 +144,15 @@ h1
 .remove_span
 {
     float: right;
-    margin-left: .4em;
-    height: 1.6em;
-    width: 1.6em;
+    /*margin-left: -1em;*/
+    height: 1.3em;
+    width: 1.3em;
     background-color: transparent;
     background-image: url(../img/删除.svg);
     background-repeat: no-repeat;
     background-size: 1em 1em;
-    background-position: 1em .3em;
+    background-position: .35em .3em;
+    cursor:pointer;
 }
 .city_input
 {
