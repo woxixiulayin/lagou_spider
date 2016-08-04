@@ -2,7 +2,7 @@ var search_cities = ["北京", "上海", "广州", "深圳", "杭州"];
 
 function diplapyJobinfo(jds) {
     var myChart = echarts.init(document.getElementById("chart"));
-    var position = $("#inputjob").text(),
+    var position = jds[0].position,
         cities = [],
         jd_chart = [];
 
@@ -52,7 +52,7 @@ function diplapyJobinfo(jds) {
 
 function getInputdata () {
     return {
-        position: document.getElementById("input_job").innerHtml,
+        position: document.getElementById("input_job").value,
         cities: search_cities
     }
 };
