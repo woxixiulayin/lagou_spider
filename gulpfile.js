@@ -1,6 +1,8 @@
+'use strict'
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
-    spawn = require('child_process').spawn;
+    spawn = require('child_process').spawn,
+    fs = require('fs');
 
 // exec("pwd", function (error, stdout, stderr)
 
@@ -18,13 +20,17 @@ gulp.task('sync', () => {
 
 //开始服务器，如果服务器代码有改动则重启
 gulp.task('observer', () => {
-    var server = spawn("node",[process.cwd() + '/app.js']);
-    console.log(server);
-    var reboot = () => {
-        server.exit(1);
-        server = spawn("node",[process.cwd() + '/app.js']);
+    let server = () => {
+        //stdio将子进程的输入输出重定向到父进程
+        return  spawn("node", [process.cwd() + '/app.js'], {stdio: [0, process.stdout , process.stderr]});
+    };
+    let myserver = server(),
+        reboot = () => {
+        myserver.kill('SIGHUP');
+        myserver = server();
+        browserSync.reload();
     }
-    gulp.watch(["app.js", "server/*.js"], [reboot, browserSync.reload]);
+    gulp.watch(["app.js", "server/*.js"], reboot);
 });
 
 gulp.task('default', ['sync', 'observer']);
