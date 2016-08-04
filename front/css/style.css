@@ -57,8 +57,8 @@ h1
 #input_job
 {   
     display: inline-block;
+    height: 33px;
     width: 250px;
-    height: 100%;
     margin-right: 4px;
     padding-left: 6px;
     font-size: 15px;
@@ -68,11 +68,16 @@ h1
 
 #submit
 {
-    height: 100%;
-    width: 40px;
+    height: 33px;
+    width: 50px;
     vertical-align: middle;
     border: 1px solid #aaa;
     border-radius: 5px;
+    background: rgb(40,96,144);
+    background-image: url("../img/查找.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 23px 23px;
 }
 
 #warp
