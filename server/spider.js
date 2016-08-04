@@ -1,73 +1,70 @@
-var request = require('request');
-var superagent = require('superagent');
+'use strict'
+const superagent = require('superagent');
+const Jd = require('./model.js').Jd;
 
-var headers = {
-            'Accept': '*/*',
-            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'Cookie': 'ASP.NET_SessionId=zikhfrrprfylac454hgu342u',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36',
-            'X-MicrosoftAjax': 'Delta=true'
-};
+//para = {positon: string, cityies: [string]}
+function Spider(para) {
+        this.para = para;
+        this.urls = [];
+}
 
-// //getHtml 是一个promise，使用异步操作在promise.then中来处理获得html的body
-var getHtml = function (url) {
-    var options = {
-        url: url,
-        headers: headers
-    };
+Spider.prototype = {
+    constructor: Spider,
 
-    var promise = new Promise(function(resolved, reject) {
-        // var reqCallback = function callback(error, response, body) {
-        //     if (!error && response.statusCode === 200) {
-        //         resolved(body);
-        //     } else {
-        //         console.log(error || response.statusCode);
-        //     }
-        // };
-        // request(options, reqCallback);
-        superagent.get(url)
+    //每个url的处理入口
+    parseUrl: function (url) {
+         return new Promise( (resolve, reject) => {
+            superagent.get(url)
             .end( (err, res) => {
                 if (err || !res.ok) {
                     console.log(err);
                     reject(err);
                 } else {
-                    resolved(res.text);
+                    //后续处理这个url下获取到的info信息
+                    let html = res.text,
+                        jd = this.getData(html);
+                    resolve(jd);
                 }
             });
-    });
-    return promise;
-};
+        });
+    },
 
-function Spider() {
-    this.urls = [];
-}
+    //制定获取数据的策略
+    getData: function (html) {
+        let positionResult = JSON.parse(html).content.positionResult,
+            //"全部"对应于总职位数,即没有指明城市时
+            city = positionResult.locationInfo.city || '全部',
+            count = positionResult.totalCount,
+            jd = new Jd(city, this.para.position, count);
+        return jd;
+    },
 
-Spider.prototype.setWorker = function (callback) {//从url获得body文本后调用this.worker进行后续操作
-    var that = this;
-    this.parseBody = function (body) {
-       var promise = new Promise(function(resolved, reject) {
-                callback.call(that, body);
-            });
-        return promise;
+    //入口函数
+    run: function () {
+        let para = this.para,
+            promises = [],
+            that = this;
+
+        //爬取职位总数据
+        this.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd");
+        //爬取单个城市
+        para.cityies.forEach( (city, index) => {
+            that.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd"+ para.position + "&city=" + city);
+        });
+
+        this.urls.forEach( function(url, index) {
+            promises.push(that.parseUrl(url));
+        });
+        return Promise.all(promises);
     }
 };
-Spider.prototype.addUrl = function (url) {//每添加一个url，设置一个worker
-    this.urls.push(url);
-    var that = this;
-    console.log(url);
-    return this.getBody(url)
-        .then((body) => {
-            that.parseBody(body);
-        });//解析body
-};
-Spider.prototype.removeUrl = function (url) {
-    var index = this.urls.indexOf(url);
-    this.urls.splice(index, 1);
-};
-Spider.prototype.getBody = function (url) {
-    return getHtml(url);
-};
 
 
-module.exports.getHtml = getHtml;
-module.exports.Spider = Spider;
+//测试
+let spider = new Spider({position:"前端", cityies:['杭州']});
+spider.run().then(jds => {
+    console.log(jds);
+});
+
+
+exports.Spider = Spider;
