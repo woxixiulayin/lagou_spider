@@ -49,7 +49,7 @@ Spider.prototype = {
         this.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd");
         //爬取单个城市
         para.cityies.forEach( (city, index) => {
-            that.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd"+ para.position + "&city=" + city);
+            that.urls.push(encodeURI("http://www.lagou.com/jobs/positionAjax.json?kd"+ para.position + "&city=" + city));
         });
 
         this.urls.forEach( function(url, index) {
@@ -61,10 +61,10 @@ Spider.prototype = {
 
 
 //测试
-let spider = new Spider({position:"前端", cityies:['杭州']});
-spider.run().then(jds => {
-    console.log(jds);
-});
+// let spider = new Spider({position:"前端", cityies:['杭州']});
+// spider.run().then(jds => {
+//     console.log(jds);
+// });
 
 
 exports.Spider = Spider;
