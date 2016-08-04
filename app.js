@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-var createjds = require("./utils.js").createjds;
-var LagouSpider = require("./lagouspider.js").LagouSpider;
+var createjds = require("./server/utils.js").createjds;
+var LagouSpider = require("./server/lagouspider.js").LagouSpider;
 var express = require("express");
 var app = express();
 

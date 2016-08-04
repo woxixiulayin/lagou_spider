@@ -63,6 +63,7 @@ h1
     padding-left: 6px;
     font-size: 15px;
     vertical-align: middle;
+    border-radius: 5px;
 }
 
 #submit
@@ -70,6 +71,8 @@ h1
     height: 100%;
     width: 40px;
     vertical-align: middle;
+    border: 1px solid #aaa;
+    border-radius: 5px;
 }
 
 #warp
