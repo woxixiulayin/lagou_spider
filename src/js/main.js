@@ -79,6 +79,9 @@ function fetchJds(inputdata) {
 function showResult() {
     fetchJds(getInputdata()).then(function (data) {
         console.log(data);
+        if(data[0] === null ) {
+            return false;
+        }
         diplapyJobinfo(data);
         $("#city_bar").slideUp(500);
     })
