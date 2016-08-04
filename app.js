@@ -15,13 +15,11 @@ router.get('/', function *() {
 
 
 router.post('/search', body, function *(next) {
+    console.log(this.request.body);
     let spider = new Spider(this.request.body);
-    yield spider.run().then((posts) => {
-        let data = [];
-        posts.forEach((ele, index) => {
-            data = data.concat(ele);
-        });
-        this.body = JSON.stringify(data);
+    yield spider.run().then((jds) => {
+        this.body = JSON.stringify(jds);
+        console.log(this.body);
     });
 });
 

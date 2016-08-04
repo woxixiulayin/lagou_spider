@@ -2,34 +2,28 @@ function $(selectors) {
     return document.querySelector(selectors);
 }
 
-function CityJobcount(city, jobcount) {
-    this.city = city;
-    this.jobcount = jobcount;
-};
-
 var inputjob = $("#input_job");
 var jobinfotable = $("#jobinfotable");
 var submit = $("#submit");
 var myChart = echarts.init($('#chart'));
 
-function diplapyJobinfo(cityjobcounts) {
-    var job_name = inputjob.value,
+function diplapyJobinfo(jds) {
+    var position = inputjob.value,
         cities = [],
-        cityjob_chart = [];
+        jd_chart = [];
 
-    cityjobcounts.forEach(function(element, index) {
-        cities.push(element.city);
-        cityjob_chart.push({
-            value: element.jobcount,
-            name: element.city
+    jds.forEach(function(jd, index) {
+        cities.push(jd.city);
+        jd_chart.push({
+            value: jd.count,
+            name: jd.city
         });
     });
-    console.log(cityjob_chart);
 
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '拉勾网' + job_name + '工作分布',
+            text: '拉勾网' + position + '工作分布',
             x: 'center'
         },
         tooltip: {
@@ -47,7 +41,7 @@ function diplapyJobinfo(cityjobcounts) {
             type: 'pie',
             radius: '55%',
             center: ['50%', '40%'],
-            data: cityjob_chart,
+            data: jd_chart,
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -61,28 +55,43 @@ function diplapyJobinfo(cityjobcounts) {
     myChart.setOption(option);
 }
 
-inputjob.onkeydown = function(event) {
-    if (event.target != this || event.keyCode != 13) return;
-    getCityJobcounts().then((res) => {
-        var cityjobcounts = JSON.parse(res);
-        diplapyJobinfo(cityjobcounts);
+
+var getInputdata = function () {
+    return {
+        position: inputjob.value,
+        cities: ["北京", "上海"]
+    }
+};
+
+var fetchJds = function(inputdata) {
+    return fetch("/search", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(inputdata)
+    }).then(function(res) {
+        if (res.ok) {
+            console.log("get data");
+            return res.json();
+        } 
+    }, function(e) {
+        console.log(e);
     });
 }
 
+// inputjob.onkeydown = function(event) {
+//     if (event.target != this || event.keyCode != 13) return;
+//     getCityJobcounts().then((res) => {
+//         var cityjobcounts = JSON.parse(res);
+//         diplapyJobinfo(cityjobcounts);
+//     });
+// }
+
 submit.onclick = function() {
-    fetch("/search", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "firstName=Nikhil&favColor=blue&password=easytoguess"
-    }).then(function(res) {
-        if (res.ok) {
-            alert("Perfect! Your settings are saved.");
-        } else if (res.status == 401) {
-            alert("Oops! You are not authorized.");
-        }
-    }, function(e) {
-        alert("Error submitting form!");
-    });
+    fetchJds(getInputdata()).then(function (data) {
+        console.log(data);
+        diplapyJobinfo(data);
+    })
 }

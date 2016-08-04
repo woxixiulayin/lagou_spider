@@ -2,7 +2,7 @@
 const superagent = require('superagent');
 const Jd = require('./model.js').Jd;
 
-//para = {positon: string, cityies: [string]}
+//para = {positon: string, cities: [string]}
 function Spider(para) {
         this.para = para;
         this.urls = [];
@@ -48,8 +48,8 @@ Spider.prototype = {
         //爬取职位总数据
         this.urls.push("http://www.lagou.com/jobs/positionAjax.json?kd");
         //爬取单个城市
-        para.cityies.forEach( (city, index) => {
-            that.urls.push(encodeURI("http://www.lagou.com/jobs/positionAjax.json?kd"+ para.position + "&city=" + city));
+        para.cities.forEach( (city, index) => {
+            that.urls.push(encodeURI("http://www.lagou.com/jobs/positionAjax.json?kd="+ para.position + "&city=" + city));
         });
 
         this.urls.forEach( function(url, index) {

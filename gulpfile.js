@@ -15,7 +15,7 @@ gulp.task('sync', () => {
     });
 
     // 所有的浏览器重载后任务完成。
-    gulp.watch(["front/**"], browserSync.reload);
+    gulp.watch(["src/**"], browserSync.reload);
 });
 
 //开始服务器，如果服务器代码有改动则重启
