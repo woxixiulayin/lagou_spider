@@ -65,6 +65,7 @@ Spider.prototype = {
                     //后续处理这个url下获取到的info信息
                     let html = res.text,
                         jd = this.getData(html);
+                    console.log("parse new url: " + url);
                     resolve(jd);
                 }
             });

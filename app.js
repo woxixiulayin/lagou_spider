@@ -5,7 +5,7 @@ var  send = require('koa-send'),
     body = require('koa-body-parser')(),
     app = koa(),
     router = require('koa-router')(),
-    Spider = require('./server/spider.js').Spider;
+    dbUtil = require('./server/dbUtil.js').dbUtil;
 
 app.use(serve((__dirname + "/src")));
 
@@ -16,8 +16,8 @@ router.get('/', function *() {
 
 router.post('/search', body, function *(next) {
     console.log(this.request.body);
-    let spider = new Spider(this.request.body);
-    yield spider.run().then((jds) => {
+    let query = this.request.body;
+    yield dbUtil.getData(query).then((jds) => {
         this.body = JSON.stringify(jds);
         console.log(this.body);
     });
