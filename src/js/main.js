@@ -52,7 +52,7 @@ function diplapyJobinfo(jds) {
 
 function getInputdata () {
     return {
-        position: document.getElementById("input_job").value,
+        position: document.getElementById("input_job").value.toLowerCase(),
         cities: search_cities
     }
 };
