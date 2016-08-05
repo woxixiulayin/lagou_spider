@@ -54,8 +54,8 @@ Spider.prototype = {
          return new Promise( (resolve, reject) => {
             superagent
             .get(url)
-            // .set("User-Agent", UALIST[Math.round(Math.random()*UALIST.length)])
-            .set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36")
+            .set("User-Agent", UALIST[Math.round(Math.random()*UALIST.length)])
+            // .set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36")
             // .set("Accept-Language", "en")
             .end( (err, res) => {
                 if (err || !res.ok) {
@@ -105,8 +105,8 @@ Spider.prototype = {
 };
 
 
-//测试
-// let spider = new Spider({position:"前端", cityies:['杭州']});
+// // 测试
+// let spider = new Spider({position:"前端", cities:['杭州', '上海']});
 // spider.run().then(jds => {
 //     console.log(jds);
 // });
