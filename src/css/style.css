@@ -115,6 +115,8 @@ h1
     vertical-align: middle;
     margin:0 1em;
 }
+
+
 .city_span:after
 {   
     position: absolute;
@@ -126,6 +128,17 @@ h1
     left: 100%;
     top:50%;
     margin-top: -0.8em;
+}
+
+.city_input
+{   
+    display: inline-block;
+    height: 1.6em;
+    line-height: 1.6em;
+    vertical-align: middle;
+    padding-left: .4em;
+    margin:0 1em;
+    border-radius: .4em;
 }
 
 .add_span
@@ -140,6 +153,7 @@ h1
     background-position: center;
     vertical-align: middle;
     margin:0 .3em;
+    cursor:pointer;
 }
 .remove_span
 {

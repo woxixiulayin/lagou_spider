@@ -47,6 +47,21 @@ $addcity.addClass("add_span");
 $cityBar.append($addcity);
 //cityBar 结束
 
+//add_span点击事件
+$(".add_span").click(function () {
+    //创建input并获得焦点
+    var $city_input = $("<input>");
+    $city_input
+        .addClass("city_input")
+        .hide()
+        .blur(function() {
+            
+        });
+    $(this).before($city_input);
+    $city_input.show(400).focus();
+
+
+});
 
 //inputJob获得焦点是显示cityBar
 $inputJob.focus(function(event) {
