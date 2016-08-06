@@ -1,7 +1,7 @@
 'use strict'
 const fs = require('fs'),
     Spider = require('./spider.js').Spider,
-    timeInt = 60*60*24,
+    timeInt = 1000*60*60*24,
     mongoose = require('mongoose'),
     TAG = "dataUtil";
 
@@ -21,9 +21,9 @@ var Schema = mongoose.Schema;
 
 var jdSchema = new Schema ({
     position: String,
-    changeTime: Date,
     city: String,
-    count: Number
+    count: Number,
+    changetime: Date
 });
 
 var Jd = mongoose.model('Jd', jdSchema);
@@ -49,16 +49,16 @@ var dbUtil = function () {
                         log(dbjd);
                         resolve(dbjd);
                     });
-                } else if (dbjd.changetime === undefined || isOutDate(dbjd.changetime)) {
+                } else if (isOutDate(dbjd.changetime)) {
                     //如果数据太旧，则更新数据
                     getOneSpiderJd(position, city).then(dbjd => {
-                        Jd.update({position: position, city: city}, {$set: {count: dbjd.count, changetime: new Date()}}, (err, dbjd)=>{
+                        Jd.update({position: position, city: city}, {$set: {count: dbjd.count, changetime: dbjd.changetime}}, (err, dbjd)=>{
                         if(err) throw err;
                             log("update data");
                             log(dbjd);
                         });
                         resolve(dbjd);
-                    })
+                    });
                 } else {
                     log(dbjd);
                     resolve(dbjd);
@@ -105,8 +105,6 @@ var dbUtil = function () {
 }();
 
 // test
-// let data = dbUtil.getData({ position: '前端', cities: [ '南京', '广州', '杭州' ] }).then(jds=>{
-//     console.log(jds);
-// });
+// let data = dbUtil.getData({ position: '前端', cities: [ '南京', '广州', '杭州' ] });
 
 exports.dbUtil = dbUtil;
