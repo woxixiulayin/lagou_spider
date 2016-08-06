@@ -30,9 +30,9 @@ search_cities.forEach(function(city, index) {
     //removespan的click动作
     $removespan.addClass("remove_span")
         .click(function() {
-            $(this).parent().hide(400, function() {
-                //删除dom元素和对应的search_cities中的数据
-                search_cities.splice(index, 1);
+            search_cities.splice(index, 1);
+            //删除dom元素和对应的search_cities中的数据
+            $(this).parent().hide(400, function() {    
                 $(this).remove();
             })
         })
@@ -55,7 +55,7 @@ $(".add_span").click(function () {
         .addClass("city_input")
         .hide()
         .blur(function() {
-            
+
         });
     $(this).before($city_input);
     $city_input.show(400).focus();

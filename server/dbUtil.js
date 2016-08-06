@@ -49,7 +49,7 @@ var dbUtil = function () {
                         log(dbjd);
                         resolve(dbjd);
                     });
-                } else if (isOutDate(dbjd.changetime)) {
+                } else if (dbjd.changetime === undefined || isOutDate(dbjd.changetime)) {
                     //如果数据太旧，则更新数据
                     getOneSpiderJd(position, city).then(dbjd => {
                         Jd.update({position: position, city: city}, {$set: {count: dbjd.count, changetime: new Date()}}, (err, dbjd)=>{
@@ -77,7 +77,7 @@ var dbUtil = function () {
     };
 
     function spiderDd2dbJd(spiderjd) {
-    if(spiderjd === null) return null;
+    if(spiderjd === null ) return null;
         let jd = new Jd({
             position: spiderjd.position,
             city: spiderjd.city,
@@ -89,7 +89,7 @@ var dbUtil = function () {
     function getOneSpiderJd(position, city) {
         return getSpiderJds({position: position, cities: [city]})
                     .then(spiderjds => {
-                        if (spiderjds.length === 0) return null;
+                        if (spiderjds ===null || spiderjds.length === 0) return null;
                         let dbjd = spiderDd2dbJd(spiderjds[0]); //只有一个元素
                         return dbjd;
                     });

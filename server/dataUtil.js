@@ -48,15 +48,15 @@ var dbUtil = function () {
                         log(dbjd);
                         resolve(dbjd);
                     });
-                } else if (isOutDate(dbjd.changetime)) {
+                } else if (isOutDate(dbjd.changeTime)) {
                     //如果数据太旧，则更新数据
                     getOneSpiderJd(position, city).then(dbjd => {
-                        Jd.update({position: position, city: city}, {$set: {count: dbjd.count, changetime: new Date()}}, (err, dbjd)=>{
+                        Jd.update({position: position, city: city}, {$set: {count: dbjd.count, changeTime: new Date()}}, (err, dbjd)=>{
                         if(err) throw err;
                             log("update data");
                             log(dbjd);
+                            resolve(dbjd);
                         });
-                        resolve(dbjd);
                     })
                 } else {
                     log(dbjd);
@@ -79,7 +79,7 @@ var dbUtil = function () {
             position: spiderjd.position,
             city: spiderjd.city,
             count: spiderjd.count,
-            changetime: new Date()
+            changeTime: new Date()
         });
         return jd;
 }
@@ -102,7 +102,7 @@ var dbUtil = function () {
 }();
 
 // test
-let data = dbUtil.getData({ position: '前端', cities: [ '南京', '广州', '杭州' ] }).then(jds=>{
+let data = dbUtil.getData({ position: 'python', cities: [ '南京', '广州', '杭州' ] }).then(jds=>{
     console.log(jds);
 });
 
