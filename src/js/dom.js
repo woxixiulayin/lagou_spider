@@ -75,6 +75,13 @@ $city_input
         $cityBar.find("input").hide(400);
         return false;
     });
+//input enter事件
+$city_input.bind("keydown", function(e) {
+     var e = event || window.event;       
+            if(e && e.keyCode==13){ // enter 键
+                $city_input.blur();
+            }
+});
 $addcity.after($city_input);
 
 
