@@ -1,5 +1,5 @@
 //设置默认的城市
-var search_cities = ["北京", "上海", "南京", "深圳", "杭州"];
+var search_cities = ["北京", "上海", "广州", "深圳", "杭州"];
 
 function diplapyJobinfo(jds) {
     var myChart = echarts.init(document.getElementById("chart"));
