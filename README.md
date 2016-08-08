@@ -1,11 +1,11 @@
 ####简介
 搜索拉勾网上的招聘信息
-展示地址：[http://120.76.29.108/](http://120.76.29.108/)
+展示地址：[http://120.76.29.108/](http://120.76.29.108/:8082)
 
 ####使用方法
 npm install --dev-save
 node app.js
-打开[http://localhost:8080/](http://localhost:8080/)
+打开[http://localhost:8082/](http://localhost:8082/)
 
 ####技术栈
 koa\mongodb\gulp\爬虫
