@@ -78,6 +78,7 @@ function fetchJds(inputdata) {
 }
 
 function showResult() {
+    if ($inputJob.val() === "") return false;
     fetchJds(getInputdata()).then(function (data) {
         console.log(data);
         if(data[0] === null ) {

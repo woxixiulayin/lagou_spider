@@ -1,12 +1,13 @@
 var $inputJob = $("#input_job"),
     $cityBar = $("#city_bar");
 
-$inputJob.click(function(event) {
+$inputJob.bind("keydown", function(event) {
     if (event.keyCode != 13) return;
     showResult();
 });
 
 $("#submit").click(function() {
+    console.log($inputJob.val());
     showResult();
 });
 
@@ -75,6 +76,7 @@ $city_input
         $cityBar.find("input").hide(400);
         return false;
     });
+
 //input enter事件
 $city_input.bind("keydown", function(e) {
      var e = event || window.event;       
