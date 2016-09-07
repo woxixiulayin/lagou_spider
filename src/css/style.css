@@ -2,13 +2,11 @@
 body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
 li, dl, dt, dd, form, a, fieldset, input, th, td
 {margin: 0; padding: 0; border: 0; outline: none;}
-h1, h2, h3, h4, h5, h6{font-size: 100%;padding: 0;margin: 0 15px;}
+h1, h2, h3, h4, h5, h6{font-size: 100%;padding: 0;}
 ul, ol{list-style: none;}
 a{color: black;text-decoration: none;}
 a:hover
 {text-decoration: underline;}
-.eft{float: left;padding: .5em .5em .5em 0;}
-.right{float: right;padding: .5em 0 .5em .5em;}
 
 
 .content
